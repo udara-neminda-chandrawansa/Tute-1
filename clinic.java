@@ -1,32 +1,39 @@
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class clinic{
-    
-    // hashmap for dermatologists which contains the arraylist of appointments
+public class Clinic {
+
+    // HashMap for dermatologists which contains the ArrayList of appointments
     // for each dermatologist
-    public static HashMap<dermatologist, ArrayList<appointment>>dermList = new HashMap<>();
+    public static HashMap<Dermatologist, ArrayList<Appointment>> dermList = new HashMap<>();
 
-    
-
-    public static void main(String[] args){
-        // System.out.println("Hi Test");
-        patient udara = new patient(1, "Udara");
+    public static void main(String[] args) {
+        // Create a new patient
+        Patient udara = new Patient(1, "Udara");
         udara.displayPatient();
 
-        appointment app1 = new appointment(1, "2024-10-20", "10:15");
-        dermatologist d = new dermatologist(1, "Kasun");
+        // Create a new appointment
+        Appointment app1 = new Appointment(1, "2024-10-20", "10:15");
 
-        if(checkAvailability("2024-10-20", "10:00", app1)){
-            // d.bookDermatologist(null); check again
+        // Create a new dermatologist
+        Dermatologist d = new Dermatologist(1, "Kasun");
+
+        // Check availability of the appointment slot
+        if (checkAvailability("2024-10-20", "10:00", app1)) {
+            ArrayList<Appointment> appointments = new ArrayList<>();
+            appointments.add(app1);
+
+            // Book the appointment for the dermatologist
+            d.bookDermatologist(appointments);
         }
     }
 
-    public static Boolean checkAvailability(String Date, String Time, appointment app){
-        if(app.appDate == Date && app.appTime == Time){
-            return false;
-        }else{
-            return true;
+    // Method to check availability of an appointment
+    public static Boolean checkAvailability(String Date, String Time, Appointment app) {
+        if (app.appDate.equals(Date) && app.appTime.equals(Time)) {
+            return false; // Time slot is not available
+        } else {
+            return true; // Time slot is available
         }
     }
 }
